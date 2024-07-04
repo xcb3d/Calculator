@@ -98,7 +98,7 @@ private fun CalculatorButtonGridLayout(dispatcher: (ActionType) -> Unit) {
         ActionType.Operator(Operators.Addition),
         ActionType.Number(0),
         ActionType.Decimal,
-        ActionType.Decimal,
+        ActionType.Const("e"),
         ActionType.Calculate
     )
 

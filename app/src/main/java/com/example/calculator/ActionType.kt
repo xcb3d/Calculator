@@ -8,6 +8,7 @@ import com.example.calculator.ui.theme.ButtonYellow
 
 sealed class ActionType(val symbol: String, val buttonColor: Color) {
     data class Number(val number: Int) : ActionType(number.toString(), ButtonBlue)
+    data class Const(val number: String) : ActionType(number.toString(), ButtonBlue)
     data class Operator(val operator: Operators) : ActionType(operator.symbol, ButtonPink)
 
     object Clear : ActionType("AC", ButtonPink)
@@ -24,4 +25,5 @@ sealed class Operators (val symbol: String){
     object Multiplication : Operators("*")
     object Division : Operators("÷")
     object Power : Operators("^")
+
 }

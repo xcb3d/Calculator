@@ -100,10 +100,13 @@ class CalculatorViewModel: ViewModel() {
             is ActionType.Delete -> onDeleteClicked()
             is ActionType.Decimal -> onDecimalClicked()
             is ActionType.Percentage -> onPercentageClicked()
+            is ActionType.Const -> onConstClicked(action.number)
         }
     }
 
+    private fun onConstClicked(number: String) {
 
+    }
 
 
     internal class ViewState(val result: String)
