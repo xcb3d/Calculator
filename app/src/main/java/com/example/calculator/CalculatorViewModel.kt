@@ -69,9 +69,15 @@ class CalculatorViewModel: ViewModel() {
                 else -> {}
             }
             val tempResult = result
-            val formattedString = String.format("%.2f", result)
-            val finalResult = formattedString.replace(',','.')
-            state.value = currentState.copy(num1 = finalResult.toString(), operator = null, num2 = "")
+            val formattedString = String.format("%.3f", result)
+            val roundedString = formattedString.trimEnd('0').trimEnd('.')
+            val replaceString = roundedString.replace(',','.')
+            val finalString = if (replaceString[replaceString.length - 1] == '.') {
+                replaceString.dropLast(1)
+            } else {
+                replaceString
+            }
+            state.value = currentState.copy(num1 = finalString.toString(), operator = null, num2 = "")
         }
     }
 
