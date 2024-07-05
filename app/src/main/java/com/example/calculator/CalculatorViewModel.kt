@@ -68,7 +68,10 @@ class CalculatorViewModel: ViewModel() {
                 Operators.Power -> num1.pow(num2)
                 else -> {}
             }
-            state.value = currentState.copy(num1 = result.toString(), operator = null, num2 = "")
+            val tempResult = result
+            val formattedString = String.format("%.2f", result)
+            val finalResult = formattedString.replace(',','.')
+            state.value = currentState.copy(num1 = finalResult.toString(), operator = null, num2 = "")
         }
     }
 
