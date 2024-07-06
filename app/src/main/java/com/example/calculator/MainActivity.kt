@@ -22,7 +22,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.calculator.ui.theme.BackgroundColor
 import com.example.calculator.ui.theme.CalculatorButtonComponent
 import com.example.calculator.ui.theme.CalculatorTheme
 import com.example.calculator.ui.theme.InputDisplayComponent
@@ -47,7 +49,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun ScreenCalculator(state: CalculatorViewModel.ViewState, dispatcher: (ActionType) -> Unit) {
     Surface(
-        color = MaterialTheme.colorScheme.background,
+        color = BackgroundColor,
         modifier = Modifier.fillMaxSize()
     ) {
         Box(
@@ -81,7 +83,7 @@ private fun CalculatorButtonGridLayout(dispatcher: (ActionType) -> Unit) {
 //    )
     val buttons = listOf(
         ActionType.Clear,
-        ActionType.Operator(Operators.Power),
+        ActionType.Delete,
         ActionType.Percentage,
         ActionType.Operator(Operators.Division),
         ActionType.Number(7),
@@ -109,7 +111,8 @@ private fun CalculatorButtonGridLayout(dispatcher: (ActionType) -> Unit) {
         content = {
         items(buttons) {
             CalculatorButtonComponent(
-                color = it.buttonColor,
+                colorButton = it.buttonColor,
+                colorText = it.textColor,
                 symbol = it.symbol,
 //                onClick = {},
                 modifier = Modifier.aspectRatio(1f)

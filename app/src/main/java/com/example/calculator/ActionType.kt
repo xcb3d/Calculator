@@ -2,20 +2,21 @@ package com.example.calculator
 
 
 import androidx.compose.ui.graphics.Color
-import com.example.calculator.ui.theme.ButtonBlue
+import com.example.calculator.ui.theme.ButtonWhite
 import com.example.calculator.ui.theme.ButtonPink
 import com.example.calculator.ui.theme.ButtonYellow
+import com.example.calculator.ui.theme.Orange
 
-sealed class ActionType(val symbol: String, val buttonColor: Color) {
-    data class Number(val number: Int) : ActionType(number.toString(), ButtonBlue)
-    data class Const(val number: String) : ActionType(number.toString(), ButtonBlue)
-    data class Operator(val operator: Operators) : ActionType(operator.symbol, ButtonPink)
+sealed class ActionType(val symbol: String, val buttonColor: Color,val textColor: Color) {
+    data class Number(val number: Int) : ActionType(number.toString(), ButtonWhite, Color.Black)
+    data class Const(val number: String) : ActionType(number.toString(), ButtonWhite, Color.Black)
+    data class Operator(val operator: Operators) : ActionType(operator.symbol, ButtonWhite,Orange)
 
-    object Clear : ActionType("AC", ButtonPink)
-    object Delete : ActionType("←", ButtonBlue)
-    object Decimal : ActionType(".", ButtonBlue)
-    object Calculate : ActionType("=", ButtonYellow)
-    object Percentage: ActionType("%", ButtonPink)
+    object Clear : ActionType("AC", ButtonWhite,Orange)
+    object Delete : ActionType("←", ButtonWhite,Orange)
+    object Decimal : ActionType(".", ButtonWhite, Color.Black)
+    object Calculate : ActionType("=", Orange, Color.White)
+    object Percentage: ActionType("%", ButtonWhite,Orange)
 
 
 }

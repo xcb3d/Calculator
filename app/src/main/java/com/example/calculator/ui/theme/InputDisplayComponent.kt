@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,7 +23,7 @@ internal fun InputDisplayComponent(state: CalculatorViewModel.ViewState) {
         Modifier
             .fillMaxWidth()
             .clip(MaterialTheme.shapes.large)
-            .background(MaterialTheme.colorScheme.onBackground)
+            .background(BackgroundColor)
             .padding(
                 vertical = MaterialTheme.spacing.md,
                 horizontal = MaterialTheme.spacing.sm
@@ -34,7 +35,8 @@ internal fun InputDisplayComponent(state: CalculatorViewModel.ViewState) {
             maxLines = 1,
             style = MaterialTheme.typography.headlineLarge,
             modifier = Modifier.fillMaxWidth(),
-            color = Color.White
+            color = Color.Black,
+            fontWeight = FontWeight.Bold
         )
     }
 }

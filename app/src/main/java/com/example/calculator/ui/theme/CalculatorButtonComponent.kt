@@ -15,13 +15,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 internal fun CalculatorButtonComponent(
     modifier: Modifier = Modifier,
-    color: androidx.compose.ui.graphics.Color,
+    colorButton: androidx.compose.ui.graphics.Color,
+    colorText: Color,
     symbol: String,
     onClick: () -> Unit
 ) {
@@ -29,7 +32,7 @@ internal fun CalculatorButtonComponent(
         contentAlignment = Alignment.Center,
         modifier = modifier
             .clip(MaterialTheme.shapes.medium)
-            .background(color)
+            .background(colorButton)
             .clickable(onClick = onClick)
             .then(modifier),
         content = {
@@ -37,24 +40,18 @@ internal fun CalculatorButtonComponent(
                 contentAlignment = Alignment.Center,
                 modifier = modifier
                     .fillMaxSize(fraction = 0.8f)
-                    .shadow(10.dp, MaterialTheme.shapes.medium, clip = true, spotColor = Color.Red)
                     .clip(MaterialTheme.shapes.medium)
-                    .background(color),
+                    .background(colorButton),
                 content = {
                     Text(text = symbol,
-                        color = Color.White)
+                        color = colorText,
+//                        fontWeight = FontWeight.Bold,
+                        fontSize = 30.sp)
                 }
             )
         })
 }
 
-@Preview(showSystemUi = true)
-@Composable
-private fun CalculatorButtonComponentPreview() {
-    CalculatorTheme {
-        CalculatorButtonComponent(modifier = Modifier.size(100.dp),color = ButtonPink, symbol = "1", onClick = {})
-    }
-}
 
 //@Preview(showSystemUi = true)
 @Composable
