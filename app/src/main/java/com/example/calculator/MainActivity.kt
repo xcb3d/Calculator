@@ -20,6 +20,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,6 +31,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.calculator.ui.theme.BackgroundColor
 import com.example.calculator.ui.theme.CalculatorButtonComponent
 import com.example.calculator.ui.theme.CalculatorTheme
+import com.example.calculator.ui.theme.ExpandButtonComponent
 import com.example.calculator.ui.theme.InputDisplayComponent
 import com.example.calculator.ui.theme.spacing
 
@@ -81,43 +86,108 @@ private fun CalculatorButtonGridLayout(dispatcher: (ActionType) -> Unit) {
 //        "3", "2", "1", "+",
 //        "e", "0", ".", "="
 //    )
-    val buttons = listOf(
-        ActionType.Clear,
-        ActionType.Delete,
-        ActionType.Percentage,
-        ActionType.Operator(Operators.Division),
-        ActionType.Number(7),
-        ActionType.Number(8),
-        ActionType.Number(9),
-        ActionType.Operator(Operators.Multiplication),
-        ActionType.Number(4),
-        ActionType.Number(5),
-        ActionType.Number(6),
-        ActionType.Operator(Operators.Subtraction),
-        ActionType.Number(1),
-        ActionType.Number(2),
-        ActionType.Number(3),
-        ActionType.Operator(Operators.Addition),
-        ActionType.Number(0),
-        ActionType.Decimal,
-        ActionType.Const("e"),
-        ActionType.Calculate
-    )
+    var isExpand by remember {
+        mutableStateOf(false)
+    }
+    val size = if (isExpand) {
+        5
+    } else {
+        4
+    }
+    val imageRes = if (isExpand) {
+        R.drawable.scale_down
+    } else {
+        R.drawable.slace_up
+    }
+    val buttons = if (isExpand) {
+        listOf(
+            ActionType.Special("2nd"),
+            ActionType.Special("deg"),
+            ActionType.Special("sin"),
+            ActionType.Special("cos"),
+            ActionType.Special("tan"),
+            ActionType.Special("^"),
+            ActionType.Special("lg"),
+            ActionType.Special("ln"),
+            ActionType.Special("("),
+            ActionType.Special(")"),
+            ActionType.Special("√"),
+            ActionType.Clear,
+            ActionType.Delete,
+            ActionType.Percentage,
+            ActionType.Operator(Operators.Division),
+            ActionType.Special("!"),
+            ActionType.Number(7),
+            ActionType.Number(8),
+            ActionType.Number(9),
+            ActionType.Operator(Operators.Multiplication),
+            ActionType.Special(" ¹ ⁄ ˣ"),
+            ActionType.Number(4),
+            ActionType.Number(5),
+            ActionType.Number(6),
+            ActionType.Operator(Operators.Subtraction),
+            ActionType.Special("π"),
+            ActionType.Number(1),
+            ActionType.Number(2),
+            ActionType.Number(3),
+            ActionType.Operator(Operators.Addition),
+            ActionType.Expand,
+            ActionType.Const("e"),
+            ActionType.Number(0),
+            ActionType.Decimal,
+            ActionType.Calculate
+
+            )
+    } else {
+        listOf(
+            ActionType.Clear,
+            ActionType.Delete,
+            ActionType.Percentage,
+            ActionType.Operator(Operators.Division),
+            ActionType.Number(7),
+            ActionType.Number(8),
+            ActionType.Number(9),
+            ActionType.Operator(Operators.Multiplication),
+            ActionType.Number(4),
+            ActionType.Number(5),
+            ActionType.Number(6),
+            ActionType.Operator(Operators.Subtraction),
+            ActionType.Number(1),
+            ActionType.Number(2),
+            ActionType.Number(3),
+            ActionType.Operator(Operators.Addition),
+            ActionType.Expand,
+            ActionType.Number(0),
+            ActionType.Decimal,
+            ActionType.Calculate,
+
+            )
+    }
 
     LazyVerticalGrid(
-        columns = GridCells.Fixed(4),
+        columns = GridCells.Fixed(size),
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.sm),
         horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.sm),
         content = {
         items(buttons) {
-            CalculatorButtonComponent(
-                colorButton = it.buttonColor,
-                colorText = it.textColor,
-                symbol = it.symbol,
+            if (it == ActionType.Expand) {
+                ExpandButtonComponent(
+                    modifier = Modifier.aspectRatio(1f),
+                    onClick = {
+                        isExpand = !isExpand
+                    },
+                    imageRes = imageRes
+                )
+            } else {
+                CalculatorButtonComponent(
+                    colorButton = it.buttonColor,
+                    colorText = it.textColor,
+                    symbol = it.symbol,
 //                onClick = {},
-                modifier = Modifier.aspectRatio(1f)
-            ) {
-                dispatcher(it)
+                    modifier = Modifier.aspectRatio(1f)
+                ) {
+                    dispatcher(it)
+                }
             }
         }
     })

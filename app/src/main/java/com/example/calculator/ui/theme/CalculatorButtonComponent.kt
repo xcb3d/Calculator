@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.sp
 internal fun CalculatorButtonComponent(
     modifier: Modifier = Modifier,
     colorButton: androidx.compose.ui.graphics.Color,
-    colorText: Color,
+    colorText : Color,
     symbol: String,
     onClick: () -> Unit
 ) {
@@ -46,7 +46,7 @@ internal fun CalculatorButtonComponent(
                     Text(text = symbol,
                         color = colorText,
 //                        fontWeight = FontWeight.Bold,
-                        fontSize = 30.sp)
+                        fontSize = 22.sp)
                 }
             )
         })

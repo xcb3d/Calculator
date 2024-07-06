@@ -11,12 +11,14 @@ sealed class ActionType(val symbol: String, val buttonColor: Color,val textColor
     data class Number(val number: Int) : ActionType(number.toString(), ButtonWhite, Color.Black)
     data class Const(val number: String) : ActionType(number.toString(), ButtonWhite, Color.Black)
     data class Operator(val operator: Operators) : ActionType(operator.symbol, ButtonWhite,Orange)
+    data class Special(val text: String) : ActionType(text.toString(), ButtonWhite,Color.Gray)
 
     object Clear : ActionType("AC", ButtonWhite,Orange)
     object Delete : ActionType("←", ButtonWhite,Orange)
     object Decimal : ActionType(".", ButtonWhite, Color.Black)
     object Calculate : ActionType("=", Orange, Color.White)
     object Percentage: ActionType("%", ButtonWhite,Orange)
+    object Expand: ActionType("Expand", ButtonWhite, Orange)
 
 
 }

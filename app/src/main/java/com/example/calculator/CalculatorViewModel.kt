@@ -110,7 +110,17 @@ class CalculatorViewModel: ViewModel() {
             is ActionType.Decimal -> onDecimalClicked()
             is ActionType.Percentage -> onPercentageClicked()
             is ActionType.Const -> onConstClicked(action.number)
+            is ActionType.Expand -> onExpandClicked()
+            is ActionType.Special -> onSpecialClicked()
         }
+    }
+
+    private fun onSpecialClicked() {
+        TODO("Not yet implemented")
+    }
+
+    private fun onExpandClicked() {
+        TODO("Not yet implemented")
     }
 
     private fun onConstClicked(number: String) {
